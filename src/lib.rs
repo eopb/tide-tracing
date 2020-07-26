@@ -1,3 +1,5 @@
+use std::error::Error;
+
 use tide::{Middleware, Next, Request};
 use tracing::{error, error_span, info, info_span, span, warn, Level};
 use tracing_futures::Instrument;
@@ -41,7 +43,8 @@ impl TraceMiddleware {
                 if status.is_server_error() {
                     async {
                         if let Some(error) = response.error() {
-                            error!(message = &error.to_string().as_str());
+                            let error: &(dyn Error) = error.as_ref();
+                            error!(error);
                         }
                         error!("Response sent");
                     }
