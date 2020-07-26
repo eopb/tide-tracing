@@ -1,9 +1,9 @@
 # tide-tracing
 
-[![License](https://img.shields.io/crates/l/tide-tracing.svg)](https://crates.io/crates/tide-tracing)
+[![License](https://img.shields.io/crates/l/tide_tracing.svg)](https://crates.io/crates/tide-tracing)
 [![Latest version](https://img.shields.io/crates/v/tide-tracing.svg)](https://crates.io/crates/tide-tracing)
 [![Latest Docs](https://docs.rs/tide-tracing/badge.svg)](https://docs.rs/tide-tracing/)
-[![downloads-badge](https://img.shields.io/crates/d/tide-tracing.svg)](https://crates.io/crates/tide-tracing)
+[![downloads-badge](https://img.shields.io/crates/d/tide_tracing.svg)](https://crates.io/crates/tide-tracing)
 
 
 A simple middleware for [`tide`](https://github.com/http-rs/tide) using the [`tracing`](https://github.com/tokio-rs/tracing) crate for logging.
