@@ -2,6 +2,13 @@
 name = "tide-tracing"
 version = "0.0.1"
 authors = ["Ethan Brierley <ethanboxx@gmail.com>"]
+license = "MIT/Apache-2.0"
+readme = "README.md"
+description = """
+A simple middleware for [`tide`](https://github.com/http-rs/tide) using the [`tracing`](https://github.com/tokio-rs/tracing) crate for logging.
+"""
+documentation = "https://docs.rs/tide-tracing/"
+repository = "https://github.com/ethanboxx/tide-tracing"
 edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
