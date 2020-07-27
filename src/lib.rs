@@ -1,4 +1,4 @@
-use std::error::Error;
+use std::{error::Error, time::Instant};
 
 use tide::{Middleware, Next, Request};
 use tracing::{error, error_span, info, info_span, warn, warn_span};
@@ -29,10 +29,10 @@ impl TraceMiddleware {
         let path = ctx.url().path().to_owned();
         let method = ctx.method().to_string();
 
-        let response = async {
+        Ok(async {
             info!(method = method.as_str());
 
-            let start = std::time::Instant::now();
+            let start = Instant::now();
             let response = next.run(ctx).await;
             let status = response.status();
 
@@ -44,20 +44,18 @@ impl TraceMiddleware {
                     async {
                         if let Some(error) = response.error() {
                             let error: &(dyn Error) = error.as_ref();
-                            error!(error);
+                            error!(error)
                         }
-                        error!("Response sent");
+                        error!("Response sent")
                     }
                     .instrument(error_span!("Internal error"))
-                    .await;
+                    .await
                 } else if status.is_client_error() {
-                    async {
-                        warn!("Response sent");
-                    }
-                    .instrument(warn_span!("Client error"))
-                    .await;
+                    async { warn!("Response sent") }
+                        .instrument(warn_span!("Client error"))
+                        .await
                 } else {
-                    info!("Response sent");
+                    info!("Response sent")
                 }
             }
             .instrument(info_span!("Response"))
@@ -65,8 +63,7 @@ impl TraceMiddleware {
             response
         }
         .instrument(info_span!("Request", path = path.as_str()))
-        .await;
-        Ok(response)
+        .await)
     }
 }
 
