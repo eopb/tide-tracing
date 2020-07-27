@@ -16,7 +16,7 @@ pub struct TraceMiddleware;
 impl TraceMiddleware {
     /// Create a new instance of `TraceMiddleware`.
     #[must_use]
-    pub fn new() -> Self {
+    pub const fn new() -> Self {
         Self
     }
 
