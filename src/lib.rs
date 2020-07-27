@@ -1,7 +1,7 @@
 use std::error::Error;
 
 use tide::{Middleware, Next, Request};
-use tracing::{error, error_span, info, info_span, span, warn, Level};
+use tracing::{error, error_span, info, info_span, warn, warn_span};
 use tracing_futures::Instrument;
 
 /// Log all incoming requests and responses with tracing spans.
@@ -51,10 +51,11 @@ impl TraceMiddleware {
                     .instrument(error_span!("Internal error"))
                     .await;
                 } else if status.is_client_error() {
-                    let span = span!(Level::WARN, "Client Error");
-                    let _enter = span.enter();
-
-                    warn!("Client Error: Response sent");
+                    async {
+                        warn!("Response sent");
+                    }
+                    .instrument(warn_span!("Client error"))
+                    .await;
                 } else {
                     info!("Response sent");
                 }
