@@ -10,6 +10,7 @@ A simple middleware for [`tide`](https://github.com/http-rs/tide) using the [`tr
 documentation = "https://docs.rs/tide-tracing/"
 repository = "https://github.com/ethanboxx/tide-tracing"
 edition = "2018"
+exclude = ["*.png"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
