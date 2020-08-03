@@ -15,7 +15,7 @@ async fn main() -> tide::Result<()> {
 
     let mut app = tide::Server::new();
 
-    app.middleware(TraceMiddleware::new());
+    app.with(TraceMiddleware::new());
 
     app.at("/working_endpoint")
         .get(|_| async { Ok(Response::new(StatusCode::Ok)) });
