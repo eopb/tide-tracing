@@ -6,7 +6,7 @@ env:
   RUST_BACKTRACE: 1
 
 jobs:
-  build_test_deploy:
+  build_test:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
     steps:
