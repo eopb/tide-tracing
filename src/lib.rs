@@ -8,7 +8,7 @@ use tracing_futures::Instrument;
 ///
 /// ```
 /// let mut app = tide::Server::new();
-/// app.middleware(tide_tracing::TraceMiddleware::new());
+/// app.with(tide_tracing::TraceMiddleware::new());
 /// ```
 #[derive(Debug, Default, Clone)]
 pub struct TraceMiddleware;
