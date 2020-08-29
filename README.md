@@ -11,9 +11,9 @@ A simple middleware for [`tide`](https://github.com/http-rs/tide) using the [`tr
 
 ## Why
 
-[`tide`](https://github.com/http-rs/tide) uses [`log`](https://github.com/rust-lang/log) in its [default logging middleware](https://docs.rs/tide/0.12.0/tide/log/struct.LogMiddleware.html).
+[`tide`](https://github.com/http-rs/tide) uses [`log`](https://github.com/rust-lang/log) in its [default logging middleware](https://docs.rs/tide/latest/tide/log/struct.LogMiddleware.html).
 When using [`tracing-log`](https://github.com/tokio-rs/tracing/tree/master/tracing-log) most of the information from tide is lost.
-This crate provides a middleware that exposes all that information to [`tracing`](https://github.com/tokio-rs/tracing) directly while also improving the structure of the logs using [`span!`](https://docs.rs/tracing/0.1.17/tracing/span/index.html).
+This crate provides a middleware that exposes all that information to [`tracing`](https://github.com/tokio-rs/tracing) directly while also improving the structure of the logs using [`span!`](https://docs.rs/tracing/latest/tracing/span/index.html).
 
 ## Docs
 
