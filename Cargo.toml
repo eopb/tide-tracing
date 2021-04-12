@@ -21,5 +21,6 @@ tracing-futures = "0.2"
 async-trait = "0.1"
 
 [dev-dependencies]
+tide = { version = "0.16", default-features = true }
 async-std = { version = "1.9", features = ["attributes"] }
 tracing-subscriber = "0.2"
