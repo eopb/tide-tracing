@@ -1,13 +1,12 @@
 use tide_tracing::TraceMiddleware;
 
-use {
-    tide::{Error, Response, Result, StatusCode},
-    tracing::Level,
-};
+use tide::{Error, Response, Result, StatusCode};
 
 #[async_std::main]
 async fn main() -> tide::Result<()> {
-    tracing_subscriber::fmt().with_max_level(Level::INFO).init();
+    tracing_subscriber::fmt()
+        .with_max_level(tracing::Level::INFO)
+        .init();
 
     let mut app = tide::Server::new();
 
