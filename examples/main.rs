@@ -8,7 +8,7 @@ use {
 #[async_std::main]
 async fn main() -> tide::Result<()> {
     let subscriber = tracing_subscriber::fmt()
-        .with_max_level(Level::TRACE)
+        .with_max_level(Level::INFO)
         .finish();
 
     tracing::subscriber::set_global_default(subscriber).expect("no global subscriber has been set");
