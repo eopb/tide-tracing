@@ -1,7 +1,7 @@
-use std::{error::Error, time::Instant};
+use std::time::Instant;
 
 use tide::{Middleware, Next, Request};
-use tracing::{error, error_span, info, info_span, warn, warn_span};
+use tracing::{error, error_span, field, info, info_span, warn, warn_span};
 use tracing_futures::Instrument;
 
 /// Log all incoming requests and responses with tracing spans.
@@ -27,42 +27,31 @@ impl TraceMiddleware {
         next: Next<'a, State>,
     ) -> tide::Result {
         let path = ctx.url().path().to_owned();
-        let method = ctx.method().to_string();
+        let method = ctx.method();
 
         Ok(async {
-            info!(method = method.as_str());
-
+            info!("received");
             let start = Instant::now();
             let response = next.run(ctx).await;
+            let duration = start.elapsed();
             let status = response.status();
 
-            async {
-                info!(status = status as u16);
-                info!(duration = &format!("{:?}", start.elapsed()).as_str());
-
+            info_span!("Response", status = status as u16, ?duration).in_scope(|| {
                 if status.is_server_error() {
-                    async {
-                        if let Some(error) = response.error() {
-                            let error: &(dyn Error) = error.as_ref();
-                            error!(error)
-                        }
-                        error!("Response sent")
+                    let span = error_span!("Internal error", error = field::Empty);
+                    if let Some(error) = response.error() {
+                        span.record("error", &field::display(error));
                     }
-                    .instrument(error_span!("Internal error"))
-                    .await
+                    span.in_scope(|| error!("sent"));
                 } else if status.is_client_error() {
-                    async { warn!("Response sent") }
-                        .instrument(warn_span!("Client error"))
-                        .await
+                    warn_span!("Client error").in_scope(|| warn!("sent"));
                 } else {
-                    info!("Response sent")
+                    info!("sent")
                 }
-            }
-            .instrument(info_span!("Response"))
-            .await;
+            });
             response
         }
-        .instrument(info_span!("Request", path = path.as_str()))
+        .instrument(info_span!("Request", %method, %path))
         .await)
     }
 }
