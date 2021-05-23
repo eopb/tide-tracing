@@ -36,22 +36,23 @@ impl TraceMiddleware {
             let duration = start.elapsed();
             let status = response.status();
 
-            info_span!("Response", status = status as u16, ?duration).in_scope(|| {
-                if status.is_server_error() {
-                    let span = error_span!("Internal error", error = field::Empty);
-                    if let Some(error) = response.error() {
-                        span.record("error", &field::display(error));
+            info_span!("Response", http.status_code = status as u16, http.duration = ?duration)
+                .in_scope(|| {
+                    if status.is_server_error() {
+                        let span = error_span!("Internal error", error = field::Empty);
+                        if let Some(error) = response.error() {
+                            span.record("error", &field::display(error));
+                        }
+                        span.in_scope(|| error!("sent"));
+                    } else if status.is_client_error() {
+                        warn_span!("Client error").in_scope(|| warn!("sent"));
+                    } else {
+                        info!("sent")
                     }
-                    span.in_scope(|| error!("sent"));
-                } else if status.is_client_error() {
-                    warn_span!("Client error").in_scope(|| warn!("sent"));
-                } else {
-                    info!("sent")
-                }
-            });
+                });
             response
         }
-        .instrument(info_span!("Request", %method, %path))
+        .instrument(info_span!("Request", http.method = %method, http.target = %path))
         .await)
     }
 }
