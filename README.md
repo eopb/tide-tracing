@@ -14,7 +14,7 @@ A simple middleware for [`tide`](https://github.com/http-rs/tide) using the [`tr
 When using [`tracing-log`](https://github.com/tokio-rs/tracing/tree/master/tracing-log) most of the information from tide is lost.
 This crate provides a middleware that exposes all that information to [`tracing`](https://github.com/tokio-rs/tracing) directly while also improving the structure of the logs using [`span!`](https://docs.rs/tracing/latest/tracing/span/index.html).
 
-`tide-tracing` uses [opentelemetry conventional trace feild names](https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/semantic_conventions/http.md#common-attributes) by default.
+`tide-tracing` uses [opentelemetry conventional trace field names](https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/semantic_conventions/http.md#common-attributes) by default.
 
 ## Docs
 - [API docs](https://docs.rs/tide-tracing/)
