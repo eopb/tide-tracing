@@ -39,9 +39,14 @@ impl TraceMiddleware {
             info_span!("Response", http.status_code = status as u16, http.duration = ?duration)
                 .in_scope(|| {
                     if status.is_server_error() {
-                        let span = error_span!("Internal error", error = field::Empty);
+                        let span = error_span!(
+                            "Internal error",
+                            detail = field::Empty,
+                            error = field::Empty
+                        );
                         if let Some(error) = response.error() {
                             span.record("error", &field::display(error));
+                            span.record("detail", &field::debug(error));
                         }
                         span.in_scope(|| error!("sent"));
                     } else if status.is_client_error() {
