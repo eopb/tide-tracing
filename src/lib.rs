@@ -3,6 +3,7 @@ use std::time::Instant;
 use tide::{Middleware, Next, Request};
 use tracing::{error, error_span, field, info, info_span, warn, warn_span};
 use tracing_futures::Instrument;
+use uuid::Uuid;
 
 /// Log all incoming requests and responses with tracing spans.
 ///
@@ -57,7 +58,22 @@ impl TraceMiddleware {
                 });
             response
         }
-        .instrument(info_span!("Request", http.method = %method, http.target = %path))
+        .instrument(
+            {
+                let span = info_span!(
+                    "Request",
+                    http.method = %method,
+                    http.target = %path,
+                    request_id = field::Empty,
+                );
+
+                // If the request_id feature is enabled, add a new request_id record to the span.
+                #[cfg(feature = "request_id")]
+                span.record("request_id", Uuid::new_v4().to_string());
+
+                span
+            }
+        )
         .await)
     }
 }

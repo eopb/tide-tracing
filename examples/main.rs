@@ -1,4 +1,4 @@
-use tide_tracing::TraceMiddleware;
+use tide_tracing_request_id::TraceMiddleware;
 
 use tide::{Error, Response, Result, StatusCode};
 

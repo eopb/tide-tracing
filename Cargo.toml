@@ -1,14 +1,14 @@
 [package]
-name = "tide-tracing"
+name = "tide-tracing-request-id"
 version = "0.0.12"
-authors = ["Ethan Brierley <ethanboxx@gmail.com>"]
+authors = ["Ethan Brierley <ethanboxx@gmail.com>", "PortableNavi <portable-navi@proton.me>"]
 license = "MIT/Apache-2.0"
 readme = "README.md"
 description = """
 A simple middleware for [`tide`](https://github.com/http-rs/tide) using the [`tracing`](https://github.com/tokio-rs/tracing) crate for logging.
 """
 documentation = "https://docs.rs/tide-tracing/"
-repository = "https://github.com/ethanboxx/tide-tracing"
+repository = "https://github.com/portablenavi/tide-tracing-request-id"
 edition = "2018"
 exclude = ["*.png"]
 
@@ -19,8 +19,14 @@ tide = { version = "0.16", default-features = false }
 tracing = "0.1"
 tracing-futures = "0.2"
 async-trait = "0.1"
+uuid = { version = "1.4.1", features = ["v4"], optional = true}
 
 [dev-dependencies]
 tide = { version = "0.16", default-features = false, features = ["h1-server"] }
 async-std = { version = "1.9", features = ["attributes"] }
 tracing-subscriber = "0.3"
+
+
+[features]
+default = ["request_id"]
+request_id = ["dep:uuid"]
