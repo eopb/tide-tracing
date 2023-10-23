@@ -14,7 +14,9 @@ edition = "2021"
 rust-version = "1.63"
 exclude = ["*.png"]
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[features]
+default = ["request_id"]
+request_id = ["dep:uuid"]
 
 [dependencies]
 tide = { version = "0.16", default-features = false }
@@ -28,7 +30,3 @@ tide = { version = "0.16", default-features = false, features = ["h1-server"] }
 async-std = { version = "1.9", features = ["attributes"] }
 tracing-subscriber = "0.3"
 
-
-[features]
-default = ["request_id"]
-request_id = ["dep:uuid"]
