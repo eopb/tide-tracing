@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1](https://github.com/eopb/tide-tracing/compare/v0.1.0...v0.1.1) - 2023-10-23
+
+### Added
+- #![forbid(unsafe_code)]
+
+### Other
+- include `README.md` content in rustdoc output
+- update changelog
+- release
+
 ## [0.1.0](https://github.com/eopb/tide-tracing/compare/v0.0.13...v0.1.0) - 2023-10-23
 
 ### Features
