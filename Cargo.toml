@@ -1,6 +1,6 @@
 [package]
 name = "tide-tracing"
-version = "0.0.12"
+version = "0.0.13"
 authors = ["Ethan Brierley <ethanboxx@gmail.com>"]
 license = "MIT/Apache-2.0"
 readme = "README.md"
