@@ -7,9 +7,11 @@ readme = "README.md"
 description = """
 A simple middleware for [`tide`](https://github.com/http-rs/tide) using the [`tracing`](https://github.com/tokio-rs/tracing) crate for logging.
 """
+keywords = ["tide", "tracing", "logging", "middleware", "opentelemetry"]
 documentation = "https://docs.rs/tide-tracing/"
 repository = "https://github.com/ethanboxx/tide-tracing"
-edition = "2018"
+edition = "2021"
+rust-version = "1.63"
 exclude = ["*.png"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
