@@ -9,7 +9,7 @@ A simple middleware for [`tide`](https://github.com/http-rs/tide) using the [`tr
 """
 documentation = "https://docs.rs/tide-tracing/"
 repository = "https://github.com/ethanboxx/tide-tracing"
-edition = "2018"
+edition = "2021"
 rust-version = "1.63"
 exclude = ["*.png"]
 
