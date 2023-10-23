@@ -1,15 +1,17 @@
 [package]
-name = "tide-tracing-request-id"
-version = "0.0.12"
-authors = ["Ethan Brierley <ethanboxx@gmail.com>", "PortableNavi <portable-navi@proton.me>"]
+name = "tide-tracing"
+version = "0.0.13"
+authors = ["Ethan Brierley <ethanboxx@gmail.com>"]
 license = "MIT/Apache-2.0"
 readme = "README.md"
 description = """
-A simple middleware for [`tide`](https://github.com/http-rs/tide) using the [`tracing`](https://github.com/tokio-rs/tracing) crate for logging.
+A simple middleware for tide using the tracing crate for logging.
 """
+keywords = ["tide", "tracing", "logging", "middleware", "opentelemetry"]
 documentation = "https://docs.rs/tide-tracing/"
-repository = "https://github.com/portablenavi/tide-tracing-request-id"
-edition = "2018"
+repository = "https://github.com/ethanboxx/tide-tracing"
+edition = "2021"
+rust-version = "1.63"
 exclude = ["*.png"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
