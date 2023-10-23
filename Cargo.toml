@@ -16,6 +16,7 @@ exclude = ["*.png"]
 
 [features]
 default = ["request_id"]
+# Record unique `request_id` for every request
 request_id = ["dep:uuid"]
 
 [dependencies]
