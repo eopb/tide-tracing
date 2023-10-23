@@ -1,3 +1,5 @@
+#![doc = include_str!("../README.md")]
+
 use std::time::Instant;
 
 use tide::{Middleware, Next, Request};
